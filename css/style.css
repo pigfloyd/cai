@@ -1,0 +1,207 @@
+/* ===== 手绘风格菜谱网站 ===== */
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap');
+
+:root {
+  --paper: #f9f4ea;
+  --paper-dark: #ede4d3;
+  --ink: #2c2416;
+  --ink-light: #6b5e4a;
+  --ink-lighter: #9b8d78;
+  --accent: #c75b39;
+  --sidebar-width: 200px;
+  --font-cn: 'ZCOOL KuaiLe', 'KaiTi', 'STKaiti', '楷体', cursive, sans-serif;
+  --font-en: 'Caveat', 'Georgia', 'Times New Roman', serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-cn);
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image:
+    repeating-linear-gradient(
+      0deg, transparent, transparent 2px,
+      rgba(139, 119, 90, 0.03) 2px, rgba(139, 119, 90, 0.03) 4px
+    ),
+    repeating-linear-gradient(
+      90deg, transparent, transparent 1px,
+      rgba(139, 119, 90, 0.02) 1px, rgba(139, 119, 90, 0.02) 2px
+    );
+  display: flex;
+  height: 100vh;
+}
+
+/* ===== 左侧面板 ===== */
+.sidebar {
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(44, 36, 22, 0.12);
+  background: linear-gradient(180deg, rgba(237,228,211,0.5) 0%, rgba(249,244,234,0.8) 100%);
+  position: relative;
+  z-index: 2;
+}
+
+.sidebar-header {
+  padding: 24px 16px 16px;
+  border-bottom: 1px solid rgba(44, 36, 22, 0.1);
+  text-align: center;
+}
+
+.sidebar-header h1 {
+  font-size: 24px;
+  font-weight: normal;
+  letter-spacing: 3px;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.sidebar-header .subtitle {
+  font-size: 11px;
+  color: var(--ink-lighter);
+  letter-spacing: 2px;
+}
+
+/* 菜谱列表 */
+.recipe-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+.recipe-list::-webkit-scrollbar {
+  width: 4px;
+}
+.recipe-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.recipe-list::-webkit-scrollbar-thumb {
+  background: var(--ink-lighter);
+  border-radius: 2px;
+}
+
+.recipe-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-cn);
+  font-size: 15px;
+  color: var(--ink);
+  gap: 10px;
+  position: relative;
+}
+
+.recipe-item:hover {
+  background: rgba(199, 91, 57, 0.06);
+}
+
+.recipe-item.active {
+  background: rgba(199, 91, 57, 0.1);
+}
+
+/* 手绘圆圈编号 */
+.recipe-num {
+  width: 30px; height: 30px;
+  border: 2px solid var(--ink-light);
+  border-radius: 46% 54% 52% 48% / 48% 52% 48% 52%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  color: var(--ink-light);
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+
+.recipe-item.active .recipe-num {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ===== 右侧主区域 ===== */
+.main-area {
+  flex: 1;
+  overflow: hidden;
+  padding: 24px;
+}
+
+/* 图片容器 - 填满右侧 */
+.illustration-container {
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.4s ease;
+}
+
+.illustration-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 淡入动画 */
+.fade-in {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  color: var(--ink-lighter);
+  font-family: var(--font-cn);
+}
+
+.empty-state .empty-icon {
+  font-size: 64px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.empty-state p {
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 800px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    max-height: 30vh;
+    border-right: none;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .sidebar-header {
+    padding: 16px 16px 10px;
+  }
+  .sidebar-header h1 { font-size: 20px; }
+  .recipe-item { padding: 10px 16px; font-size: 14px; }
+
+  .main-area {
+    padding: 12px;
+  }
+}

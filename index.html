@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>手绘菜谱</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Caveat:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 左侧面板：菜谱列表 -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h1>祖传菜谱</h1>
+    </div>
+    <nav class="recipe-list" id="recipeList">
+      <!-- JS 动态渲染 -->
+    </nav>
+  </aside>
+
+  <!-- 右侧主区域：大图插画 -->
+  <main class="main-area">
+    <div class="illustration-container fade-in" id="illustration">
+      <!-- JS 动态渲染 SVG -->
+    </div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
