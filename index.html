@@ -11,22 +11,25 @@
 </head>
 <body>
 
-  <!-- 左侧面板：菜谱列表 -->
-  <aside class="sidebar">
+  <!-- 全屏背景图片（点击可隐藏列表） -->
+  <div class="bg-layer" id="bgLayer"></div>
+
+  <!-- 唤出列表按钮 -->
+  <button class="menu-toggle" id="menuToggle" title="菜谱列表">
+    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 10 Q10 8 16 9 Q22 10 26 9"/>
+      <path d="M6 16 Q10 14 16 15 Q22 16 26 15"/>
+      <path d="M6 22 Q10 24 16 23 Q22 22 26 23"/>
+    </svg>
+  </button>
+
+  <!-- 浮动毛玻璃侧栏 -->
+  <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <h1>祖传菜谱</h1>
     </div>
-    <nav class="recipe-list" id="recipeList">
-      <!-- JS 动态渲染 -->
-    </nav>
+    <nav class="recipe-list" id="recipeList"></nav>
   </aside>
-
-  <!-- 右侧主区域：大图插画 -->
-  <main class="main-area">
-    <div class="illustration-container fade-in" id="illustration">
-      <!-- JS 动态渲染 SVG -->
-    </div>
-  </main>
 
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
