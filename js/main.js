@@ -22,9 +22,9 @@ function renderList() {
   });
 }
 
-function selectRecipe(index) {
+function selectRecipe(index, direction) {
   currentIndex = index;
-  showImage(index);
+  showImage(index, direction);
 
   var items = recipeListEl.querySelectorAll('.recipe-item');
   items.forEach(function (item, i) {
@@ -34,12 +34,12 @@ function selectRecipe(index) {
   hideSidebar();
 }
 
-function showImage(index) {
+function showImage(index, direction) {
   var recipe = recipes[index];
   var img = document.createElement('img');
-  img.src = recipe.image;
+  img.src = 'images/' + recipe.name + '.png';
   img.alt = recipe.name;
-  img.className = 'fade-in';
+  img.className = direction === 'left' ? 'slide-left' : direction === 'right' ? 'slide-right' : 'fade-in';
 
   bgLayerEl.innerHTML = '';
   bgLayerEl.appendChild(img);
@@ -65,8 +65,35 @@ function toggleSidebar() {
 
 toggleBtn.addEventListener('click', toggleSidebar);
 
-// 点击背景图片隐藏列表
+// 点击背景图片隐藏列表（滑动时不触发）
+var touchStartX = 0;
+var touchStartY = 0;
+var touchMoved = false;
+
+bgLayerEl.addEventListener('touchstart', function (e) {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+  touchMoved = false;
+});
+
+bgLayerEl.addEventListener('touchmove', function () {
+  touchMoved = true;
+});
+
+bgLayerEl.addEventListener('touchend', function (e) {
+  if (!touchMoved) return;
+  var dx = e.changedTouches[0].clientX - touchStartX;
+  var dy = e.changedTouches[0].clientY - touchStartY;
+  if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
+  if (dx < 0) {
+    selectRecipe((currentIndex + 1) % recipes.length, 'left');
+  } else {
+    selectRecipe((currentIndex - 1 + recipes.length) % recipes.length, 'right');
+  }
+});
+
 bgLayerEl.addEventListener('click', function () {
+  if (touchMoved) return;
   if (!sidebarEl.classList.contains('hidden')) {
     hideSidebar();
   }
