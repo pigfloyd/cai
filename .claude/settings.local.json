@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__ide__getDiagnostics",
+      "PowerShell(Get-ChildItem \"D:\\\\personal\\\\cai\\\\images\" | ForEach-Object { $_.Name + \" \\(\" + [math]::Round\\($_.Length/1KB\\) + \"KB\\)\" })",
+      "Bash(gh auth *)",
+      "PowerShell(winget install *)"
+    ]
+  }
+}
